@@ -34,8 +34,8 @@ public class ProjectParser{
 
 	    }
 	 
-	 public static List<String> getPackages(File dir) {
-		    // Create a list to store the packages
+	 public List<String> getPackages(File dir) {
+		    // Create a list to store the packages and classes
 		    List<String> packages = new Vector<>();
 		    List<String> classes=new Vector<>();
 
