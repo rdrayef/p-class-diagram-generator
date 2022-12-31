@@ -10,7 +10,7 @@ public class Method {
 	private List<Parameter> parameters;
 	private int modifier;
 	private boolean isConstructor;
-	private String type;
+	private String returntype;
 
 	public Method() {
 		parameters=new Vector<>();
@@ -48,14 +48,14 @@ public class Method {
 		this.isConstructor = isConstructor;
 	}
 
-	public String getType() {
-		return type;
+	public String getReturntype() {
+		return returntype;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setReturntype(String returntype) {
+		this.returntype = returntype;
 	}
-	
+
 	public String getParameterizedUMLString(){
 		StringBuffer umlStr = new StringBuffer();
 		if(parameters != null){
@@ -71,8 +71,9 @@ public class Method {
 			umlStr.append(Modifier.toString(modifier) + name + "()");
 		}
 		
-		return (type != null) ? umlStr.append(": " + type + "\n").toString() : umlStr.append(" \n").toString();
+		return (returntype != null) ? umlStr.append(": " + returntype + "\n").toString() : umlStr.append(" \n").toString();
 	}
+	
 	
 
 }

@@ -35,7 +35,7 @@ public class ProjectParser{
 			PackageParser packageParser = new PackageParser(packageName,path);
 			for (String className : packageParser.getSubClasses()) {
 				ClassParser parser = new ClassParser(className,path);
-				System.out.println("Classe::"+parser.getClasstoParse().getName());
+				System.out.println("Classe::"+parser.getClasstoParse());
 			}
 		}
 	 }
