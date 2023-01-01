@@ -1,4 +1,4 @@
-package org.mql.java.loader;
+package org.mql.java.helpers;
 
 import java.io.File;
 import java.net.MalformedURLException;

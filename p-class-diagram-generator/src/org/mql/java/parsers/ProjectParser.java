@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.mql.java.enums.Modifiers;
-import org.mql.java.models.Attribute;
+import org.mql.java.models.Attribute;import org.mql.java.models.Method;
 
 
 public class ProjectParser{
@@ -35,11 +35,15 @@ public class ProjectParser{
 					ClassParser parser = new ClassParser(className,path);
 					Class<?> current=parser.getClasstoParse();
 					System.out.println(current.getSimpleName()+":");
-					for(Field f:current.getDeclaredFields()) {
-						System.out.println("	"+parser.getModifiers(f.getModifiers()).label+" "+f.getName());
+					for(Attribute atr:parser.parseAttributes()) {
+						System.out.println(atr.getUMLString());
 					}
-					
-
+					for(Method met:parser.parseConstructors()) {
+						System.out.println(met.getParameterizedUMLString());
+					}
+					for(Method met:parser.parseMethods()) {
+						System.out.println(met.getParameterizedUMLString());
+					}
 				}
 			}
 		}

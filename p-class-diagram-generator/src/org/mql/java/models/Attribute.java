@@ -1,12 +1,14 @@
 package org.mql.java.models;
 
-import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+
+import org.mql.java.helpers.ParseHelper;
 
 public class Attribute {
 	private int modifier;
 	private String name;
-	private String initialValue;
-	private String type;
+	private Object initialValue;
+	private Type type;
 	private boolean isStatic;
 	private boolean isFinal;
 
@@ -30,12 +32,12 @@ public class Attribute {
 		this.name = name;
 	}
 
-	public String getInitialValue() {
+	public Object getInitialValue() {
 		return initialValue;
 	}
 
-	public void setInitialValue(String initialValue) {
-		this.initialValue = initialValue;
+	public void setInitialValue(Object object) {
+		this.initialValue = object;
 	}
 
 	
@@ -56,16 +58,17 @@ public class Attribute {
 		this.isFinal = isFinal;
 	}
 
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 	
 	public String getUMLString(){
-		return Modifier.toString(modifier) + name + ": " + type + initialValue + "\n";
+		String initv=!"".equals(initialValue) && null!=initialValue ?" ="+initialValue:"";
+		return ParseHelper.getModifiers(modifier).getLabel()+" "+name+" : "+type.getTypeName()+initv;
 	}
 
 }

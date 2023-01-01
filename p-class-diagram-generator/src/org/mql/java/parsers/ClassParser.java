@@ -2,6 +2,7 @@ package org.mql.java.parsers;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.util.Arrays;
@@ -9,7 +10,8 @@ import java.util.List;
 import java.util.Vector;
 
 import org.mql.java.enums.Modifiers;
-import org.mql.java.loader.CustomClassLoader;
+import org.mql.java.helpers.CustomClassLoader;
+import org.mql.java.helpers.ParseHelper;
 import org.mql.java.models.Attribute;
 import org.mql.java.models.Method;
 
@@ -34,70 +36,35 @@ public class ClassParser {
 	}
 	
 	public List<Attribute> parseAttributes(){
-		List<Attribute> attributes=new Vector<>();
-		for(Field field:classtoParse.getFields()) {
-			Attribute attr=new Attribute();
-			attr.setModifier(field.getModifiers());
-			attr.setName(field.getName());
-			attr.setType(attr.getType());
-			attr.setInitialValue(attr.getInitialValue());
-			attributes.add(attr);
+		try {
+			return ParseHelper.parseAttributes(classtoParse);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return attributes;
+		return null;
 	}
 	
 	public List<Method> parseConstructors(){
-		List<Method> constructors=new Vector<>();
-		for(Constructor<?> c:classtoParse.getDeclaredConstructors()) {
-			Method cst=new Method();
-			cst.setConstructor(true);
-			cst.setModifier(c.getModifiers());
-			cst.setName(c.getName());
-			cst.setReturntype(null);
-			cst.setParameters(Arrays.asList(c.getParameters()));
-		}
-		return constructors;
+		return ParseHelper.parseConstructors(classtoParse);
 	}
 	
 	public List<Method> parseMethods(){
-		List<Method> methodes=new Vector<>();
-		for(java.lang.reflect.Method m:classtoParse.getDeclaredMethods()) {
-			Method met=new Method();
-			met.setConstructor(false);
-			met.setModifier(m.getModifiers());
-			met.setName(m.getName());
-			met.setReturntype(m.getReturnType().getSimpleName());
-			met.setParameters(Arrays.asList(m.getParameters()));
-		}
-		return methodes;
-	}
-	
-	public Modifiers getModifiers(int modifier) {
-		String m = Modifier.toString(modifier);
-		switch(m) {
-			case "public":
-				return Modifiers.PUBLIC;
-			case "private":
-				return Modifiers.PRIVATE;
-			case "protected":
-				return Modifiers.PROTECTED;
-			default :
-				return Modifiers.PACKAGE;
-		}
-		
+		return ParseHelper.parseMethods(classtoParse);
 	}
 	
 	
 	public boolean isInterface() {
-		return classtoParse.isInterface();
+		return ParseHelper.isInterface(classtoParse);
 	}
 	
 	public boolean isEnnum() {
-		return classtoParse.isEnum();
+		return ParseHelper.isEnnum(classtoParse);
 	}
 	
 	public boolean isAnnotation() {
-		return classtoParse.isAnnotation();
+		return ParseHelper.isAnnotation(classtoParse);
 	}
 	
 	
