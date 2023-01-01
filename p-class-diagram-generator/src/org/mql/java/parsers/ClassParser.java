@@ -2,11 +2,13 @@ package org.mql.java.parsers;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import org.mql.java.enums.Modifiers;
 import org.mql.java.loader.CustomClassLoader;
 import org.mql.java.models.Attribute;
 import org.mql.java.models.Method;
@@ -33,7 +35,7 @@ public class ClassParser {
 	
 	public List<Attribute> parseAttributes(){
 		List<Attribute> attributes=new Vector<>();
-		for(Field field:classtoParse.getDeclaredFields()) {
+		for(Field field:classtoParse.getFields()) {
 			Attribute attr=new Attribute();
 			attr.setModifier(field.getModifiers());
 			attr.setName(field.getName());
@@ -70,6 +72,22 @@ public class ClassParser {
 		return methodes;
 	}
 	
+	public Modifiers getModifiers(int modifier) {
+		String m = Modifier.toString(modifier);
+		switch(m) {
+			case "public":
+				return Modifiers.PUBLIC;
+			case "private":
+				return Modifiers.PRIVATE;
+			case "protected":
+				return Modifiers.PROTECTED;
+			default :
+				return Modifiers.PACKAGE;
+		}
+		
+	}
+	
+	
 	public boolean isInterface() {
 		return classtoParse.isInterface();
 	}
@@ -81,4 +99,6 @@ public class ClassParser {
 	public boolean isAnnotation() {
 		return classtoParse.isAnnotation();
 	}
+	
+	
 }

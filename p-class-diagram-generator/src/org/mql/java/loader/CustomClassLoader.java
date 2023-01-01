@@ -12,9 +12,9 @@ public class CustomClassLoader extends ClassLoader{
 		try {
 			File file = new File(basePath);
 			URL[] url = { file.toURI().toURL() };
-			try (URLClassLoader urlcl = new URLClassLoader(url)) {
+			URLClassLoader urlcl = new URLClassLoader(url);
 				return urlcl.loadClass(name);
-			}
+			
 		} catch (Exception ex) {
 			System.out.println("Class Inexisstante");
 			ex.printStackTrace();

@@ -1,22 +1,21 @@
 package org.mql.java.parsers;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+
+import org.mql.java.enums.Modifiers;
+import org.mql.java.models.Attribute;
+
 
 public class ProjectParser{
 	private String path;
 
-	public ProjectParser(String path) throws MalformedURLException, ClassNotFoundException  {
+	public ProjectParser(String path) throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
 		this.path=path+"\\bin\\";
 		//startProcess();
 		listPackages();
@@ -25,17 +24,23 @@ public class ProjectParser{
 	
 	
 
-	 public void listPackages() throws MalformedURLException, ClassNotFoundException {
+	 public void listPackages() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		// Get a list of all the files in the /bin directory
 		List<String> packageList = new Vector<>();
 		getPackages(path,packageList);
-
-		
 		for (String packageName : packageList) {
 			PackageParser packageParser = new PackageParser(packageName,path);
 			for (String className : packageParser.getSubClasses()) {
-				ClassParser parser = new ClassParser(className,path);
-				System.out.println("Classe::"+parser.getClasstoParse());
+				if(!className.matches(".*\\$[0-9]+.*")) {
+					ClassParser parser = new ClassParser(className,path);
+					Class<?> current=parser.getClasstoParse();
+					System.out.println(current.getSimpleName()+":");
+					for(Field f:current.getDeclaredFields()) {
+						System.out.println("	"+parser.getModifiers(f.getModifiers()).label+" "+f.getName());
+					}
+					
+
+				}
 			}
 		}
 	 }
@@ -44,7 +49,6 @@ public class ProjectParser{
 	private void getPackages(String dir, List<String> packages) {
 		File directory = new File(dir);
 		File[] filesList = directory.listFiles();
-
 		// Iterate through the files and add directories to the list of packages
 		for (File file : filesList) {
 			if (file.isFile()) {

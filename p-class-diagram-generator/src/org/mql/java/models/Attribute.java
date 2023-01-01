@@ -6,8 +6,9 @@ public class Attribute {
 	private int modifier;
 	private String name;
 	private String initialValue;
-	private boolean isUMLClassType;
 	private String type;
+	private boolean isStatic;
+	private boolean isFinal;
 
 	public Attribute() {
 		// TODO Auto-generated constructor stub
@@ -37,12 +38,22 @@ public class Attribute {
 		this.initialValue = initialValue;
 	}
 
-	public boolean isUMLClassType() {
-		return isUMLClassType;
+	
+
+	public boolean isStatic() {
+		return isStatic;
 	}
 
-	public void setUMLClassType(boolean isUMLClassType) {
-		this.isUMLClassType = isUMLClassType;
+	public void setStatic(boolean isStatic) {
+		this.isStatic = isStatic;
+	}
+
+	public boolean isFinal() {
+		return isFinal;
+	}
+
+	public void setFinal(boolean isFinal) {
+		this.isFinal = isFinal;
 	}
 
 	public String getType() {
