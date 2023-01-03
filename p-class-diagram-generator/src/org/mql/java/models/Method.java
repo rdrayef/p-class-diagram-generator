@@ -1,9 +1,10 @@
 package org.mql.java.models;
 
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 import java.util.List;
 import java.util.Vector;
+
+import org.mql.java.helpers.ParseHelper;
 
 public class Method {
 	private String name;
@@ -57,22 +58,24 @@ public class Method {
 	}
 
 	public String getParameterizedUMLString(){
-		StringBuffer umlStr = new StringBuffer();
-		if(parameters != null){
-			umlStr.append(Modifier.toString(modifier));
-			umlStr.append(name + "(");
-			for(int i=0; i < parameters.size(); i++){
-				umlStr.append(parameters.get(i).getName() + ": " + parameters.get(i).getType());
-			}
-			umlStr.toString();
-			//String.join(",", umlStr);
-			umlStr.append(")");
-		}else {
-			umlStr.append(Modifier.toString(modifier) + name + "()");
-		}
-		
-		return (returntype != null) ? umlStr.append(": " + returntype + "\n").toString() : umlStr.append(" \n").toString();
+		StringBuffer sb = new StringBuffer(); 
+		sb.append(ParseHelper.getModifiers(modifier).getLabel()+" ");
+		sb.append(getName());
+		    sb.append("(");
+		    for (int i = 0; i < getParameters().size(); i++) {
+		        sb.append(getParameters().get(i).getName());
+		        sb.append(" "+getParameters().get(i).getType().getSimpleName());
+		        if (i < getParameters().size() - 1) {
+		            sb.append(", ");
+		        }
+		    }
+		    sb.append(")");
+		    if(!isConstructor)
+		    sb.append(": "+returntype);
+		    return sb.toString();
 	}
+	
+	
 	
 	
 

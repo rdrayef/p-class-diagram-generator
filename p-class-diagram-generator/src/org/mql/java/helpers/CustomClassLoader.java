@@ -12,7 +12,7 @@ public class CustomClassLoader extends ClassLoader{
 		try {
 			File file = new File(basePath);
 			URL[] url = { file.toURI().toURL() };
-			URLClassLoader urlcl = new URLClassLoader(url);
+			URLClassLoader urlcl = new URLClassLoader(url,Thread.currentThread().getContextClassLoader());
 				return urlcl.loadClass(name);
 			
 		} catch (Exception ex) {

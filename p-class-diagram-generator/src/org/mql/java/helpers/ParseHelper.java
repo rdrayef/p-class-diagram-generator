@@ -38,7 +38,7 @@ public class ParseHelper {
             symbol = Modifiers.FINAL;
             break;
         default:
-            symbol = Modifiers.PRIVATE;
+            symbol = Modifiers.UNKNOWN;
             break;
 		}
 		return symbol;

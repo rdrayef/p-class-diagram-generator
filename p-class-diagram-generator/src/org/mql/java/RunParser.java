@@ -21,7 +21,7 @@ public class RunParser {
 	}
 
 	public static void main(String[] args) {
-		new RunParser("C:\\Users\\redou\\Documents\\MQL-2023\\Java\\projects\\DRAYEF Redouane-Generics");
+		new RunParser("C:\\Users\\redou\\Documents\\MQL-2023\\Java\\projects\\p03-annotation-reflection");
 	}
 
 }

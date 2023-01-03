@@ -1,15 +1,8 @@
 package org.mql.java.parsers;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
-
-import org.mql.java.enums.Modifiers;
 import org.mql.java.helpers.CustomClassLoader;
 import org.mql.java.helpers.ParseHelper;
 import org.mql.java.models.Attribute;
