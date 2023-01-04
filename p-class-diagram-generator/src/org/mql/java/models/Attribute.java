@@ -1,13 +1,16 @@
 package org.mql.java.models;
 
-import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+
+import org.mql.java.helpers.ParseHelper;
 
 public class Attribute {
 	private int modifier;
 	private String name;
-	private String initialValue;
-	private boolean isUMLClassType;
-	private String type;
+	private Object initialValue;
+	private Type type;
+	private boolean isStatic;
+	private boolean isFinal;
 
 	public Attribute() {
 		// TODO Auto-generated constructor stub
@@ -29,32 +32,43 @@ public class Attribute {
 		this.name = name;
 	}
 
-	public String getInitialValue() {
+	public Object getInitialValue() {
 		return initialValue;
 	}
 
-	public void setInitialValue(String initialValue) {
-		this.initialValue = initialValue;
+	public void setInitialValue(Object object) {
+		this.initialValue = object;
 	}
 
-	public boolean isUMLClassType() {
-		return isUMLClassType;
+	
+
+	public boolean isStatic() {
+		return isStatic;
 	}
 
-	public void setUMLClassType(boolean isUMLClassType) {
-		this.isUMLClassType = isUMLClassType;
+	public void setStatic(boolean isStatic) {
+		this.isStatic = isStatic;
 	}
 
-	public String getType() {
+	public boolean isFinal() {
+		return isFinal;
+	}
+
+	public void setFinal(boolean isFinal) {
+		this.isFinal = isFinal;
+	}
+
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 	
 	public String getUMLString(){
-		return Modifier.toString(modifier) + name + ": " + type + initialValue + "\n";
+		String initv=!"".equals(initialValue) && null!=initialValue ?" ="+initialValue:"";
+		return ParseHelper.getModifiers(modifier).getLabel()+" "+name+" : "+type.getTypeName()+initv;
 	}
 
 }
