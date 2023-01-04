@@ -1,5 +1,6 @@
 package org.mql.java.helpers;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -7,11 +8,14 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import org.mql.java.enums.Modifiers;
 import org.mql.java.models.Attribute;
+import org.mql.java.models.Interface;
 import org.mql.java.models.Method;
+import org.mql.java.models.Model;
 
 public class ParseHelper {
 
@@ -42,6 +46,23 @@ public class ParseHelper {
             break;
 		}
 		return symbol;
+	}
+	
+	public static void getPackages(String dir, Set<String> packages) {
+		File directory = new File(dir);
+		File[] filesList = directory.listFiles();
+
+		// Iterate through the files and add directories to the list of packages
+		for (File file : filesList) {
+			if (file.isFile() && file.getName().endsWith(".class")) {
+				String path = file.getPath();
+				String packName = path.substring(path.indexOf("bin") + 4, path.lastIndexOf('\\'));
+				packages.add(packName.replace('\\', '.'));
+			} else if (file.isDirectory()) {
+				// Call the recursive method with the directory as input
+				getPackages(file.getAbsolutePath(), packages);
+			}
+		}
 	}
 	
 	public static List<Attribute> parseAttributes(Class<?> classtoParse) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
@@ -111,6 +132,15 @@ public class ParseHelper {
 	        e.printStackTrace();
 	    }
 	    return null;
+	}
+	
+	public static Class<?> checkClassType(Class<?> c) {
+		if(c.isInterface()) {
+			return Interface.class;
+		}else {
+			return org.mql.java.models.Class.class;
+		}
+		
 	}
 
 }

@@ -1,14 +1,12 @@
 package org.mql.java.models;
 
 import java.util.List;
+import java.util.Set;
 
 public class Package {
 	
 	private String name;
-	private List<Class> classes;
-	private List<Interface> interfaces;
-	private List<Annotation> annotations;
-	private List<Ennum> enumerations;
+	private Set<Model> models;
 	
 	public Package(String name) {
 		this.name=name;
@@ -22,37 +20,16 @@ public class Package {
 		this.name = name;
 	}
 
-	public List<Class> getClasses() {
-		return classes;
+	
+
+	public Set<Model> getModels() {
+		return models;
 	}
 
-	public void setClasses(List<Class> classes) {
-		this.classes = classes;
+	public void setModels(Set<Model> models) {
+		this.models = models;
 	}
 
-	public List<Interface> getInterfaces() {
-		return interfaces;
-	}
-
-	public void setInterfaces(List<Interface> interfaces) {
-		this.interfaces = interfaces;
-	}
-
-	public List<Annotation> getAnnotations() {
-		return annotations;
-	}
-
-	public void setAnnotations(List<Annotation> annotations) {
-		this.annotations = annotations;
-	}
-
-	public List<Ennum> getEnumerations() {
-		return enumerations;
-	}
-
-	public void setEnumerations(List<Ennum> enumerations) {
-		this.enumerations = enumerations;
-	}
 	
 	
 
