@@ -1,6 +1,7 @@
 package org.mql.java.models;
 
 import java.util.List;
+import java.util.Set;
 
 public class Class extends Model{
 
@@ -48,20 +49,25 @@ public class Class extends Model{
 
 	
 
-	public List<Attribute> getAttributes() {
+	public Set<Attribute> getAttributes() {
 		return super.getAttributes();
 	}
 
-	public void setAttributes(List<Attribute> attributes) {
+	public void setAttributes(Set<Attribute> attributes) {
 		super.setAttributes(attributes);
 	}
 
 
-	public List<Method> getMethods() {
+	public Set<Method> getMethods() {
 		return super.getMethods();
 	}
 
-	public void setMethods(List<Method> methods) {
+	public void setMethods(Set<Method> methods) {
 		super.setMethods(methods);
+	}
+	
+	@Override
+	public String toString() {
+		return "CLASS: "+super.toString();
 	}
 }

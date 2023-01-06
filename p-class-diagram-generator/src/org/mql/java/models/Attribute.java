@@ -66,9 +66,10 @@ public class Attribute {
 		this.type = type;
 	}
 	
-	public String getUMLString(){
+	@Override
+	public String toString() {
 		String initv=!"".equals(initialValue) && null!=initialValue ?" ="+initialValue:"";
-		return ParseHelper.getModifiers(modifier).getLabel()+" "+name+" : "+type.getTypeName()+initv;
+		return ParseHelper.getModifiers(modifier).getLabel()+" "+name+" : "+ParseHelper.getShortForm(type)+initv;
 	}
 
 }
