@@ -1,6 +1,7 @@
 package org.mql.java.models;
 
 import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Vector;
 
@@ -57,14 +58,16 @@ public class Method {
 		this.returntype = returntype;
 	}
 
-	public String getParameterizedUMLString(){
+	
+	@Override
+	public String toString() {
 		StringBuffer sb = new StringBuffer(); 
 		sb.append(ParseHelper.getModifiers(modifier).getLabel()+" ");
 		sb.append(getName());
 		    sb.append("(");
 		    for (int i = 0; i < getParameters().size(); i++) {
 		        sb.append(getParameters().get(i).getName());
-		        sb.append(" "+getParameters().get(i).getType().getSimpleName());
+		        sb.append(" "+ParseHelper.getShortForm(getParameters().get(i).getParameterizedType()));
 		        if (i < getParameters().size() - 1) {
 		            sb.append(", ");
 		        }

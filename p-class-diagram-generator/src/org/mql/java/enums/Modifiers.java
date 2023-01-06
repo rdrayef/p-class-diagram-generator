@@ -5,8 +5,6 @@ public enum Modifiers {
 	PRIVATE("+"),
 	PROTECTED("#"),
 	PACKAGE("~"),
-	STATIC("static"),
-    FINAL("final"),
     UNKNOWN("");
 	
 	public final String label;
