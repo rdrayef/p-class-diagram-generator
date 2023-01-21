@@ -15,9 +15,12 @@ public class ProjectParser{
 	private final static Logger logger = Logger.getLogger(ProjectParser.class.getName());
 	private String path;
 
+	
 	public ProjectParser(String path) throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
 		this.path=path+"\\bin\\";
 		Project parsedproject=parse();
+		ProjectDomParser domParser = new ProjectDomParser(parsedproject);
+		domParser.generate();
 		System.out.println(parsedproject);
 	}
 	

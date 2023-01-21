@@ -62,6 +62,7 @@ public class PackageParser {
 				Model model;
 				try {
 					model = new ClassParser(classFileName,path).parse();
+					if(!(model==null))
 					pck.addModel(model);
 				} catch (MalformedURLException | ClassNotFoundException e) {
 					logger.severe("Problem Parsing Package");

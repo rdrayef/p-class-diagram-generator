@@ -17,7 +17,7 @@ public class RunParser {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public static void main(String[] args) {

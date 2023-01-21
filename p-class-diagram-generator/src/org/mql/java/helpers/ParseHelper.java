@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class ParseHelper {
             symbol = Modifiers.PROTECTED;
             break;
         default:
-            symbol = Modifiers.UNKNOWN;
+            symbol = Modifiers.PACKAGE;
             break;
 		}
 		return symbol;
@@ -175,5 +176,6 @@ public class ParseHelper {
 	        return type.getTypeName();
 	    }
 	}
-
+	
+	
 }

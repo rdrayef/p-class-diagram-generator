@@ -1,56 +1,48 @@
 package org.mql.java.models;
 
+import org.mql.java.enums.RelationType;
+
 public class RelationShip {
-	private Class parent;
-	private Class child;
-	private String type;
-	private String parentCardinality;
-	private String childCardinality;
+	private Model source;
+	private Model target;
+	private RelationType relationType;
 
 	public RelationShip() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Class getParent() {
-		return parent;
+
 	}
 
-	public void setParent(Class parent) {
-		this.parent = parent;
+	public RelationShip(Model source, Model target, RelationType relationType) {
+		this.source = source;
+		this.target = target;
+		this.relationType = relationType;
 	}
 
-	public Class getChild() {
-		return child;
+	public Model getSource() {
+		return source;
 	}
 
-	public void setChild(Class child) {
-		this.child = child;
+	public void setSource(Model source) {
+		this.source = source;
 	}
 
-	public String getType() {
-		return type;
+	public Model getTarget() {
+		return target;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTarget(Model target) {
+		this.target = target;
 	}
 
-	public String getParentCardinality() {
-		return parentCardinality;
+	public RelationType getRelationType() {
+		return relationType;
 	}
 
-	public void setParentCardinality(String parentCardinality) {
-		this.parentCardinality = parentCardinality;
+	public void setRelationType(RelationType relationType) {
+		this.relationType = relationType;
 	}
 
-	public String getChildCardinality() {
-		return childCardinality;
+	@Override
+	public String toString() {
+		return source.getName() + " " + relationType.getSymbol() + " " + target.getName();
 	}
-
-	public void setChildCardinality(String childCardinality) {
-		this.childCardinality = childCardinality;
-	}
-	
-	
-
 }

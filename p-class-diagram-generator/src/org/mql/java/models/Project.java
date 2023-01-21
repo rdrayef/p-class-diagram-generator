@@ -6,11 +6,13 @@ import java.util.Set;
 
 public class Project {
 	private Set<Package> packages;
+	private Set<RelationShip> relations;
 	private String name;
 	private String path;
 	
 	public Project(File pathtoproject) {
 		packages=new HashSet<>();
+		relations=new HashSet<>();
 		this.name=pathtoproject.getName();
 		this.path=pathtoproject.getAbsolutePath();
 	}
@@ -52,6 +54,15 @@ public class Project {
 		packages.add(newpackage);
 	}
 	
+	
+	public void addRelation(RelationShip relation) {
+		relations.add(relation);
+	}
+
+	public Set<RelationShip> getRelations() {
+		return relations;
+	}
+
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer("Project : " + name+"\n");
