@@ -74,7 +74,7 @@ public class XMLNodeMapper implements Mapper {
 					XMLNode constantNode;
 					for (Attribute aConsant : ((Ennum) currentObj).getAttributes()) {
 						constantNode = new XMLNode("constant", 1);
-						constantNode.setAttribute("value", aConsant.getName());
+						constantNode.setAttribute("value", aConsant.getName().toUpperCase());
 						constantsNode.appendChild(constantNode);
 					}
 					node.appendChild(constantsNode);

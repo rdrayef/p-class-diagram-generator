@@ -3,17 +3,17 @@ package org.mql.java.models;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Model {
+public class Model{
 	private String name;
 	private Set<Attribute> attributes;
 	private Set<Method> methods;
 
 	public Model() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Model(String name) {
-		this.name = name;
+		this.name=name;
 		attributes = new HashSet<>();
 		methods = new HashSet<>();
 	}
