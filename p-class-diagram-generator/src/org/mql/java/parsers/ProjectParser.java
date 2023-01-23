@@ -14,11 +14,12 @@ import org.mql.java.models.Project;
 public class ProjectParser{
 	private final static Logger logger = Logger.getLogger(ProjectParser.class.getName());
 	private String path;
+	private Project parsedproject;
 
 	
 	public ProjectParser(String path) throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
 		this.path=path+"\\bin\\";
-		Project parsedproject=parse();
+		parsedproject=parse();
 		ProjectDomParser domParser = new ProjectDomParser(parsedproject);
 		domParser.generate();
 		System.out.println(parsedproject);
@@ -39,5 +40,10 @@ public class ProjectParser{
 		
 		return project;
 	 }
+	 
+	 
+	 public Project getParsedproject() {
+		return parsedproject;
+	}
 
 }
