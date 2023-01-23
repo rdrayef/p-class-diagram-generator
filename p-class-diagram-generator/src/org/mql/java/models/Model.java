@@ -3,17 +3,19 @@ package org.mql.java.models;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Model {
+public class Model{
 	private String name;
 	private Set<Attribute> attributes;
 	private Set<Method> methods;
 
-
+	public Model() {
+		
+	}
 
 	public Model(String name) {
-		this.name = name;
-		attributes=new HashSet<>();
-		methods=new HashSet<>();
+		this.name=name;
+		attributes = new HashSet<>();
+		methods = new HashSet<>();
 	}
 
 	public String getName() {
@@ -43,16 +45,13 @@ public class Model {
 	@Override
 	public String toString() {
 		String umlString = getName() + "\n";
-		for(Attribute attr : attributes) {
+		for (Attribute attr : attributes) {
 			umlString = umlString + " " + attr + "\n";
 		}
-		for(Method method : methods) {
+		for (Method method : methods) {
 			umlString = umlString + " " + method + "\n";
 		}
 		return umlString;
 	}
-	
-	
-	
-	
+
 }

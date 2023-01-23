@@ -4,8 +4,7 @@ public enum Modifiers {
 	PUBLIC("-"),
 	PRIVATE("+"),
 	PROTECTED("#"),
-	PACKAGE("~"),
-    UNKNOWN("");
+	PACKAGE("~");
 	
 	public final String label;
 	

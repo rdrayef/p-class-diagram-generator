@@ -4,16 +4,21 @@ import java.lang.reflect.Type;
 
 import org.mql.java.helpers.ParseHelper;
 
-public class Attribute {
+public class Attribute{
 	private int modifier;
 	private String name;
 	private Object initialValue;
 	private Type type;
 	private boolean isStatic;
 	private boolean isFinal;
-
+	private boolean isConstant;
+	
 	public Attribute() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Attribute(String name) {
+		this.name=name;
 	}
 
 	public int getModifier() {
@@ -27,7 +32,7 @@ public class Attribute {
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -66,10 +71,24 @@ public class Attribute {
 		this.type = type;
 	}
 	
+	public boolean isConstant() {
+		return isConstant;
+	}
+
+	public void setConstant(boolean isConstant) {
+		this.isConstant = isConstant;
+	}
+	
+	
 	@Override
 	public String toString() {
-		String initv=!"".equals(initialValue) && null!=initialValue ?" ="+initialValue:"";
-		return ParseHelper.getModifiers(modifier).getLabel()+" "+name+" : "+ParseHelper.getShortForm(type)+initv;
+		if(!isConstant) {
+			String initv=!"".equals(initialValue) && null!=initialValue ?" ="+initialValue:"";
+			return ParseHelper.getModifiers(modifier).getLabel()+" "+name+" : "+ParseHelper.getShortForm(type)+initv;
+		}else {
+			return name.toUpperCase();
+		}
+		
 	}
 
 }
