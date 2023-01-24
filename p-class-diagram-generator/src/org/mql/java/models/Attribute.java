@@ -12,7 +12,16 @@ public class Attribute{
 	private boolean isStatic;
 	private boolean isFinal;
 	private boolean isConstant;
+	private boolean isMultiple;
 	
+	public boolean isMultiple() {
+		return isMultiple;
+	}
+
+	public void setMultiple(boolean isMultiple) {
+		this.isMultiple = isMultiple;
+	}
+
 	public Attribute() {
 		// TODO Auto-generated constructor stub
 	}
@@ -90,5 +99,7 @@ public class Attribute{
 		}
 		
 	}
+
+	
 
 }

@@ -35,11 +35,11 @@ public class ModelUI extends BoxPanel implements Movable {
 		drawOperationsPanel();
 
 		if (model instanceof Interface) {
-			setBackground(new Color(184, 249, 168));
+			setBackground(new Color(255,174,174));
 		} else if (model instanceof Ennum) {
-			setBackground(new Color(209, 166, 253));
+			setBackground(new Color(255,206,159));
 		} else {
-			setBackground(Color.white);
+			setBackground(new Color(122,207,245));
 		}
 
 		setSize(getPreferredSize());

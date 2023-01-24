@@ -7,7 +7,6 @@ public class Class extends Model{
 
 	private String parent;
 	private List<Class> implinterfaces;
-	private List<Class> innerclasses;
 	
 	
 	public Class(String name) {
@@ -37,14 +36,6 @@ public class Class extends Model{
 
 	public void setImplinterfaces(List<Class> implinterfaces) {
 		this.implinterfaces = implinterfaces;
-	}
-
-	public List<Class> getInnerclasses() {
-		return innerclasses;
-	}
-
-	public void setInnerclasses(List<Class> innerclasses) {
-		this.innerclasses = innerclasses;
 	}
 
 	

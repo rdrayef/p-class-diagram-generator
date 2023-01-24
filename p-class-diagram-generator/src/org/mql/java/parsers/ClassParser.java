@@ -89,6 +89,8 @@ public class ClassParser {
 				methods.addAll(parseConstructors());
 				methods.addAll(parseMethods());
 				model.setMethods(methods);
+				if(getClasstoParse().getSuperclass()!=null)
+					model.setParent(getClasstoParse().getSuperclass().getSimpleName());
 			}
 			return model;
 		}
