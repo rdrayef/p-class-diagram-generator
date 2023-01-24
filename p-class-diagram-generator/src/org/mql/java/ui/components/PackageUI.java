@@ -91,9 +91,9 @@ public class PackageUI extends BoxPanel implements Movable {
 	private void drawModels(int padding) {
 		modelsPanel = new JPanel(null);
 		
-		modelsPanel.setLayout(new WrapLayout(FlowLayout.LEFT, padding, padding));
+		modelsPanel.setLayout(new FlowLayout(FlowLayout.LEADING,padding,padding));
 		modelsPanel.setBorder(new LineBorder(Color.black, 1));
-		modelsPanel.setBackground(UiUtils.rgbColor(253, 239, 231));
+		modelsPanel.setBackground(UiUtils.rgbColor(213,223,240));
 		
 		for (Model model : Package.getModels()) {
 			ModelUI uiModel = new ModelUI(model);
@@ -117,7 +117,7 @@ public class PackageUI extends BoxPanel implements Movable {
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout(FlowLayout.LEFT, padding, padding));	
 		p.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Color.black));
-		p.setBackground(UiUtils.rgbColor(253, 239, 231));
+		p.setBackground(UiUtils.rgbColor(213,223,240));
 		p.add(titleLabel);
 		
 		titlePanel.add(p);

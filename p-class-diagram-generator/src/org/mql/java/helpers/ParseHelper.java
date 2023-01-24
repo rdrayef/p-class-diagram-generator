@@ -4,15 +4,20 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.mql.java.enums.Modifiers;
+import org.mql.java.enums.RelationType;
 import org.mql.java.models.Attribute;
 import org.mql.java.models.Interface;
 import org.mql.java.models.Method;
+import org.mql.java.models.Model;
+import org.mql.java.models.RelationShip;
 
 public class ParseHelper {
 
@@ -65,6 +70,7 @@ public class ParseHelper {
 				attr.setModifier(field.getModifiers());
 				attr.setName(field.getName());
 				attr.setType(field.getGenericType());
+				attr.setMultiple(isIterable(field));
 				if (classtoParse.isEnum())
 					attr.setConstant(true);
 				// attr.setInitialValue(getFieldValue(obj,field.getName()));
@@ -172,6 +178,60 @@ public class ParseHelper {
 		} else {
 			return type.getTypeName();
 		}
+	}
+
+	public static boolean isAbstract(int modifiers) {
+		return Modifier.toString(modifiers).contains("abstract");
+	}
+
+	public static boolean isStatic(int modifiers) {
+		return Modifier.toString(modifiers).contains("static");
+	}
+
+	public static boolean isFinal(int modifiers) {
+		return Modifier.toString(modifiers).contains("final");
+	}
+
+	
+	public static boolean parameterInAtLeastOneConstructor(String parametertype, Model source) {
+		for (Method method : source.getMethods()) {
+			if (isConstructorParameter(parametertype, method)) {
+				return true;
+			}
+
+		}
+
+		return false;
+	}
+
+	public static boolean isConstructorParameter(String parameterTypeName, Method method) {
+		return isOperationParameter(parameterTypeName, method) && method.isConstructor();
+	}
+
+	public static boolean isMethodParameter(String parameterTypeName, Method method) {
+		return isOperationParameter(parameterTypeName, method) && !method.isConstructor();
+	}
+
+	public static boolean isOperationParameter(String parameterTypeName, Method operation) {
+		for (Parameter param : operation.getParameters()) {
+			if (param.getType().equals(parameterTypeName))
+				return true;
+		}
+
+		return false;
+	}
+
+	public static Attribute childInParentAttributes(Model target, Model source) {
+		for (Attribute attribute : source.getAttributes()) {
+			if (attribute.getType().getTypeName().contains(target.getName()))
+				return attribute;
+		}
+
+		return null;
+	}
+
+	public static boolean isIterable(Field field) {
+		return Iterable.class.isAssignableFrom(field.getType()) || field.getType().isArray();
 	}
 
 }

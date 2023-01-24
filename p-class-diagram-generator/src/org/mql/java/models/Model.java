@@ -7,6 +7,7 @@ public class Model{
 	private String name;
 	private Set<Attribute> attributes;
 	private Set<Method> methods;
+	private String parent;
 
 	public Model() {
 		
@@ -40,6 +41,16 @@ public class Model{
 
 	public void setMethods(Set<Method> methods) {
 		this.methods = methods;
+	}
+	
+	
+	public String getParent() {
+		return parent;
+	}
+	
+	
+	public void setParent(String parent) {
+		this.parent = parent;
 	}
 
 	@Override

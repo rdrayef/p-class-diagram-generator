@@ -43,6 +43,6 @@ public class RelationShip {
 
 	@Override
 	public String toString() {
-		return source.getName() + " " + relationType.getSymbol() + " " + target.getName();
+		return source.getName() + " "+relationType.name() +" "+ relationType.getSymbol() + " " + target.getName()+"\n";
 	}
 }
